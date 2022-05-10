@@ -1,5 +1,6 @@
 package no.fintlabs;
 
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import no.fintlabs.model.Status;
 import org.springframework.stereotype.Service;
@@ -13,7 +14,9 @@ public class StatusService {
 
     static Status SYSTEM_DEFAULT_REPLY_STATUS = Status.ACCEPTED;
 
+    @Getter
     public Status defaultReplyStatus;
+    @Getter
     public Queue<Status> replyStatusQueue;
 
     public StatusService() {
@@ -26,7 +29,7 @@ public class StatusService {
     }
 
     public void setReplyStatusQueue(Queue<Status> statusQueue) {
-        log.info("Setting reply status queue to " + replyStatusQueue);
+        log.info("Setting reply status queue to " + statusQueue);
         this.replyStatusQueue = statusQueue;
     }
 

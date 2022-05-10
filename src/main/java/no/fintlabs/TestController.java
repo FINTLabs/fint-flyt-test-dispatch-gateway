@@ -20,16 +20,16 @@ public class TestController {
     @PutMapping("default-reply-status")
     public ResponseEntity<?> setDefaultReplyStatus(@RequestBody() Status replyStatus) {
         statusService.setDefaultReplyStatus(replyStatus);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(statusService.getDefaultReplyStatus());
     }
 
-    @PutMapping("next-reply-statuses")
-    public ResponseEntity<?> setNextReplyStatuses(@RequestBody() List<Status> replyStatuses) {
+    @PutMapping("reply-status-queue")
+    public ResponseEntity<List<Status>> setReplyStatusQueue(@RequestBody() List<Status> replyStatuses) {
         statusService.setReplyStatusQueue(new LinkedList<>(replyStatuses));
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(statusService.getReplyStatusQueue().stream().toList());
     }
 
-    @PutMapping("reset-reply-status")
+    @DeleteMapping("reply-status-configuration")
     public ResponseEntity<?> resetReplyStatus() {
         statusService.resetReplyStatus();
         return ResponseEntity.ok().build();
